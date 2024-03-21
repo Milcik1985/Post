@@ -78,4 +78,21 @@ h1 {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    height: 75%;
+}
+
+.active {
+    background-color: wheat;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 2px solid white;
+    max-width: 69%;
+    font-weight: bold;
+}
+
+footer {
+    background-color: orange;
+    height: 2rem;
+    text-align: center;
+    padding: 1rem;
 }

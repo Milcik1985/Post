@@ -1,3 +1,10 @@
+import { addMovieRecommendationButton } from './script.js';
+
+// 2. Per front-end sukurt formą kuri įdėtu filmą į servisą; zr.script.js
+document.addEventListener('DOMContentLoaded', (event) => {
+    addMovieRecommendationButton()
+})
+
 // 1. Parašyt endpointą kuris leistu atspauzdint concolėje filmo rekomendacijos objektą, filmo rekomendacija susideda iš: id, title, raiting, description, imdbLink. Filmo rekomendacija turi būt atsiųsta per body;
 const express = require('express')
 const cors = require('cors')
@@ -68,6 +75,7 @@ app.delete("/deleteAllMovieRecommendations", (req, res) => {
 app.get("/getMovieRecommendationById/:movieRecommendationId", (req, res) => {
     const movieRecommendationById = movieRecommendations.find((m) => m.id === Number(req.params.movieRecommendationId));
 
+// Parašytas endpointas turi gražint 404 statusą jei filmo su tokiu id neegzistuoja;
     if (!movieRecommendationById) {
         return res.status(404).json({message: "There are no movie recommendation with such ID"})
     }
@@ -115,37 +123,4 @@ app.listen(3000, ()=> {
    }
 
    */
-
-
-// Parašytas endpointas turi gražint 404 statusą jei filmo su tokiu id neegzistuoja;
-// 2. Per front-end sukurt formą kuri įdėtu filmą į servisą;
-
-const btn = document.getElementsByClassName("btn")[0];
-const movieRecommendationsContainer = document.getElementById("movie-recommendation-container");
-const idInput = document.getElementById("id");
-const titleInput = document.getElementById("title");
-const ratingInput = document.getElementById("rating");
-const descriptionInput = document.getElementById("description");
-const linkInput = document.getElementById("imdb-link");
-
-btn.addEventListener("click", () => {
-    const id = document.createElement("div");
-    ondblclick.innerHTML = `ID: ${idInput.value}`;
-    const title = document.createElement("div");
-    title.innerHTML = `Title: ${titleInput.value}`;
-    const rating = document.createElement("div");
-    rating.innerHTML = `Rating: ${ratingInput.value}`;
-    const description = document.createElement("div");
-    description.innerHTML = `Description: ${descriptionInput.value}`;
-    const imdbLink = document.createElement("a");
-    imdbLink.href = linkInput.value;
-    imdbLink.innerHTML = `IMDB link`;
-    imdbLink.target = "_blank";
-
-    movieRecommendationsContainer.append(id);
-    movieRecommendationsContainer.append(title);
-    movieRecommendationsContainer.append(rating);
-    movieRecommendationsContainer.append(description);
-    movieRecommendationsContainer.append(imdbLink);
-})
 // 3. CAO 4
