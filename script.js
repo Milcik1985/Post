@@ -10,23 +10,33 @@ const linkInput = document.getElementById("imdb-link");
 
 export function addMovieRecommendationButton() {
     btn.addEventListener("click", () => {
-    const id = document.createElement("div");
-    id.innerHTML = `ID: ${idInput.value}`;
-    const title = document.createElement("div");
-    title.innerHTML = `Title: ${titleInput.value}`;
-    const rating = document.createElement("div");
-    rating.innerHTML = `Rating: ${ratingInput.value}`;
-    const description = document.createElement("div");
-    description.innerHTML = `Description: ${descriptionInput.value}`;
-    const imdbLink = document.createElement("a");
-    imdbLink.href = linkInput.value;
-    imdbLink.innerHTML = `IMDB link`;
-    imdbLink.target = "_blank";
+        const movieDetails = [
+            { label: "ID", value: idInput.value },
+            { label: "Title", value: titleInput.value },
+            { label: "Rating", value: ratingInput.value },
+            { label: "Description", value: descriptionInput.value }
+        ];
+            const recommendationWrapper = document.createElement("div")
+            recommendationWrapper.classList.add("active")
 
-    movieRecommendationsContainer.classList.add("active")
-    movieRecommendationsContainer.append(id);
-    movieRecommendationsContainer.append(title);
-    movieRecommendationsContainer.append(rating);
-    movieRecommendationsContainer.append(description);
-    movieRecommendationsContainer.append(imdbLink);
-})};
+            movieDetails.forEach(detail => {
+                const div = document.createElement("div");
+                div.innerHTML = `${detail.label}: ${detail.value}`;
+                recommendationWrapper.append(div);
+            });
+
+            const imdbLink = document.createElement("a");
+            imdbLink.href = linkInput.value;
+            imdbLink.innerHTML = `IMDB link`;
+            imdbLink.target = "_blank";
+            recommendationWrapper.append(imdbLink)
+
+            movieRecommendationsContainer.append(recommendationWrapper)
+                
+            idInput.value = "";
+            titleInput.value = "";
+            ratingInput.value = "";
+            descriptionInput.value = "";
+            linkInput.value = "";
+});
+}
