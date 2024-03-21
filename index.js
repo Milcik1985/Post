@@ -22,6 +22,13 @@ app.post("/createMovieRecommendation", function (req, res){
      "imdbLink": req.body.imdbLink,
     };
 
+    // kitas sprendimas:
+    // const isTaskExists = tasks.some((t) => t.id === task.id);
+ 
+    // if (isTaskExists) {
+    //   return res.status(409).json({ message: "This task already exists" });
+    // }
+
 // 2. Pamodifikuot endpointą, sugebėtu išsaugoti filmo rekomendaciją į masyvo kintamąjį; // Reiks rekomandaciją supushint;
 movieRecommendations.push(movieRecommendation)
 
@@ -39,6 +46,11 @@ app.get("/getAllMovieRecommendations", (req, res) => {
     }
     return res.json({movieRecommendations: movieRecommendations})
 })
+
+// if (!tasks.length) {
+//     return res.json({ status: "task array is empty" });
+//   }
+
 // 4. Parašyt endpointą kuris gražintu visas rekomendacijas išrikiuotas mažėjimo tvarka pagal reitingą;
 
 app.get("/getSortedByRatingMovieRecommendations", (req, res) => {
