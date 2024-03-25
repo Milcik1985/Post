@@ -1,5 +1,4 @@
 // 2. Per front-end sukurt formą kuri įdėtu filmą į servisą;
-
 const btn = document.getElementsByClassName("btn")[0];
 const movieRecommendationsContainer = document.getElementById("movie-recommendation-container");
 const idInput = document.getElementById("id");
@@ -7,6 +6,7 @@ const titleInput = document.getElementById("title");
 const ratingInput = document.getElementById("rating");
 const descriptionInput = document.getElementById("description");
 const linkInput = document.getElementById("imdb-link");
+
 
 export function addMovieRecommendationButton() {
     btn.addEventListener("click", () => {
@@ -40,3 +40,27 @@ export function addMovieRecommendationButton() {
             linkInput.value = "";
 });
 }
+
+// fetch ("http://localhost:3000/createMovieRecommendation").then ((response => {
+//     console.log(response)
+// }));
+
+// fetch ("http://localhost:3000/getAllMovieRecommendations").then ((response => {
+//     console.log(response)
+// }));
+
+// fetch ("http://localhost:3000/createMovieRecommendation").then ((response => {
+//     console.log(response)
+// }));
+
+// fetch ("http://localhost:3000/getSortedByRatingMovieRecommendations").then ((response => {
+//     console.log(response)
+// }));
+
+// fetch ("http://localhost:3000/deleteAllMovieRecommendations").then ((response => {
+//     console.log(response)
+// }));
+
+// fetch ("http://localhost:3000/getMovieRecommendationById/:movieRecommendationId").then ((response => {
+//     console.log(response)
+// }));
