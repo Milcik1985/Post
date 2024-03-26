@@ -1,7 +1,7 @@
 // 1. Parašyt endpointą kuris leistu atspauzdint concolėje filmo rekomendacijos objektą, filmo rekomendacija susideda iš: id, title, raiting, description, imdbLink. Filmo rekomendacija turi būt atsiųsta per body;
-const movieRecommendations = [];
+let movieRecommendations = [];
 
-module.exports.CREATE_MOVIE_RECOMMENDATION = (req, res) => {
+const CREATE_MOVIE_RECOMMENDATION = (req, res) => {
 
 // 6. Patobulint add movie endpointą, kad jus neleistu pridėti filmo su jau egzistuojančiu id;
         const existingMovieId = movieRecommendations.find(movie => movie.id === req.body.id);
@@ -33,7 +33,7 @@ module.exports.CREATE_MOVIE_RECOMMENDATION = (req, res) => {
 
 
 // 3. Parašyt endpointą kuris parsiųstu visas išsaugotas rekomendacijas;
-module.exports.GET_ALL_MOVIE_RECOMMENDATIONS = (req, res) => {
+const GET_ALL_MOVIE_RECOMMENDATIONS = (req, res) => {
 
     // 7. Patobulint savo endpointą bei bei jei masyvas yra tuščias - gražinti 200 statusa su žinute "Data not exist".
         if (movieRecommendations.length === 0) {
@@ -47,19 +47,19 @@ module.exports.GET_ALL_MOVIE_RECOMMENDATIONS = (req, res) => {
     //   }
 
 // 4. Parašyt endpointą kuris gražintu visas rekomendacijas išrikiuotas mažėjimo tvarka pagal reitingą;
-module.exports.GET_SORTED_BY_RATING_MOVIE_RECOMMENDATIONS = (req, res) => {
+const GET_SORTED_BY_RATING_MOVIE_RECOMMENDATIONS = (req, res) => {
     movieRecommendations.sort((a, b) => b.rating - a.rating);
     return res.json({movieRecommendations: movieRecommendations})
 };
 
 // 5. Parašyt endpointą kuris ištrintų visas rekomendacijas;
-module.exports.DELETE_ALL_MOVIE_RECOMMENDATIONS = (req, res) => {
+const DELETE_ALL_MOVIE_RECOMMENDATIONS = (req, res) => {
     movieRecommendations.length = 0;
     return res.status(200).json({status: "All movie recommendations are deleted"})
 };
 
 // 1. Prie buvusios  užduoties reikia pridėti getById endpointą;
-module.exports.GET_MOVIE_RECOMMENDATION_BY_ID = (req, res) => {
+const GET_MOVIE_RECOMMENDATION_BY_ID = (req, res) => {
     const movieRecommendationById = movieRecommendations.find((m) => m.id === Number(req.params.movieRecommendationId));
 
 // Parašytas endpointas turi gražint 404 statusą jei filmo su tokiu id neegzistuoja;
@@ -69,6 +69,30 @@ module.exports.GET_MOVIE_RECOMMENDATION_BY_ID = (req, res) => {
 
     return res.json({movieRecommendation: movieRecommendationById})
 };
+
+const GET_10_MOVIE_RECOMMENDATIONS = (req, res) => {
+    if (movieRecommendations.length === 0) {
+        return res.status(200).json({status: "Data not exist"});
+    }
+    const limitedRecommendations = movieRecommendations.slice(0,10);
+    return res.json({movieRecommendations: limitedRecommendations});
+}
+
+const UPDATE_MOVIE_RECOMMENDATION_BY_ID = (req, res) => {
+    const doesMovieRecommendationExist = movieRecommendations.some((movieRecommendation) => movieRecommendation.id === req.params.id);
+
+    if (!doesMovieRecommendationExist) {
+        return res.status(404).json({message: `Movie recommendation with id ${req.params.id} does not exist`})
+    }
+    const index = movieRecommendations.findIndex((movieRecommendation) => movieRecommendation.id === req.params.id);
+
+        movieRecommendations[index] = {...movieRecommendations[index], ...req.body};
+
+        return res.json({updatedMovieRecommendation: movieRecommendations[index]})
+    }
+
+
+export {CREATE_MOVIE_RECOMMENDATION, GET_ALL_MOVIE_RECOMMENDATIONS, GET_SORTED_BY_RATING_MOVIE_RECOMMENDATIONS, DELETE_ALL_MOVIE_RECOMMENDATIONS, GET_MOVIE_RECOMMENDATION_BY_ID, GET_10_MOVIE_RECOMMENDATIONS, UPDATE_MOVIE_RECOMMENDATION_BY_ID}
 
 /*
  {

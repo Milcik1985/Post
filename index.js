@@ -1,14 +1,26 @@
-import { addMovieRecommendationButton } from './Front-End/script.js';
-
 //  2. Per front-end sukurt formą kuri įdėtu filmą į servisą; 
-    document.addEventListener('DOMContentLoaded', () => {
-     addMovieRecommendationButton()
- }); 
 
-const express = require('express');
-const cors = require('cors');
-const movieRouter = require("./src/routes/movie.js");
-require("dotenv").config();
+// const express = require('express');
+// const cors = require('cors');
+// const movieRouter = require("./src/routes/movie.js");
+// require("dotenv").config();
+// const app = express();
+// app.use(cors());
+// app.use(express.json());
+// app.use(movieRouter);
+
+// app.listen(process.env.PORT, ()=> {
+//     // console.log("App is running")
+//     console.log(`app runs on port ${process.env.PORT}`)
+// });
+
+
+// 0. Pakeisti common js
+import express from 'express';
+import cors from 'cors';
+import movieRouter from "./src/routes/movie.js";
+// https://www.npmjs.com/package/dotenv?activeTab=readme:
+import 'dotenv/config'
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -20,8 +32,6 @@ app.listen(process.env.PORT, ()=> {
 });
 
 
-
-
 // 1. Į savo applikacija isidiegti nodemon bei sukurti dev scriptą;
 
 // 2. Užsirašyt dotenv bei padėt savo portą į secret failą (.env);+
@@ -29,3 +39,9 @@ app.listen(process.env.PORT, ()=> {
 // 4. eslint+
 
 // 5. Prasitestuoti savo applikaciją, patikrint ar endpointai gražiną teisingą informaciją;
+
+
+// 1. Sukurti product rest api.
+// 2. Naudoti teisingus endoint'ų pavadinimus.+
+// 3. Panaudot GET, POST, PUT, DELETE+
+// 4. Pamodifikuot, /tasks, kad jis visad gražintu tam tikrą nurodytą kiekį products. (default 10).
