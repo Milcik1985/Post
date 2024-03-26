@@ -9,7 +9,7 @@ const CREATE_MOVIE_RECOMMENDATION = (req, res) => {
             return res.status(409).json({status: "Conflict", message: "Movie with this id already exists"})
         }
         const movieRecommendation = {
-         "id": req.body.id, 
+         "id": req.body.id.toString(), 
          "title": req.body.title, 
          "rating": req.body.rating,
          "description": req.body.description, 
@@ -60,7 +60,7 @@ const DELETE_ALL_MOVIE_RECOMMENDATIONS = (req, res) => {
 
 // 1. Prie buvusios  užduoties reikia pridėti getById endpointą;
 const GET_MOVIE_RECOMMENDATION_BY_ID = (req, res) => {
-    const movieRecommendationById = movieRecommendations.find((m) => m.id === Number(req.params.movieRecommendationId));
+    const movieRecommendationById = movieRecommendations.find((m) => m.id === Number(req.params.id));
 
 // Parašytas endpointas turi gražint 404 statusą jei filmo su tokiu id neegzistuoja;
     if (!movieRecommendationById) {
