@@ -1,11 +1,12 @@
 module.exports = {
     "env": {
-        "commonjs": true,
         "es2021": true,
-        "node": true, 
-        "browser": true
+        "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
     "overrides": [
         {
             "env": {
@@ -20,13 +21,12 @@ module.exports = {
         }
     ],
     "parserOptions": {
-        "ecmaVersion": 2020,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
+        "ecmaVersion": "latest",
+        "sourceType": "module"
     },
+    "plugins": [
+        "react"
+    ],
     "rules": {
     }
 }
-
