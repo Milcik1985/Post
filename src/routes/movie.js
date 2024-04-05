@@ -1,31 +1,25 @@
 import express from "express";
-import { CREATE_MOVIE_RECOMMENDATION, 
-    GET_ALL_MOVIE_RECOMMENDATIONS, 
-    GET_SORTED_BY_RATING_MOVIE_RECOMMENDATIONS, 
-    DELETE_ALL_MOVIE_RECOMMENDATIONS, 
-    GET_MOVIE_RECOMMENDATION_BY_ID,
-    GET_10_MOVIE_RECOMMENDATIONS,
-    UPDATE_MOVIE_RECOMMENDATION_BY_ID  } from "../controllers/movie.js";
+import { CREATE_MOVIE, 
+    GET_ALL_MOVIES, 
+    GET_SORTED_BY_RATING_MOVIES, 
+    GET_MOVIE_BY_ID,
+    DELETE_ALL_MOVIES,
+    GET_10_MOVIES,
+    UPDATE_MOVIE_BY_ID,  } from "../controllers/movie.js";
 const router = express.Router();
 
+router.post("/movies", CREATE_MOVIE);
 
+router.get("/movies", GET_ALL_MOVIES);
 
-router.post("/movies", CREATE_MOVIE_RECOMMENDATION);
+router.get("/sortedMovies", GET_SORTED_BY_RATING_MOVIES);
 
-// 3. Parašyt endpointą kuris parsiųstu visas išsaugotas rekomendacijas;
-router.get("/moviesRecommendations", GET_ALL_MOVIE_RECOMMENDATIONS);
+router.delete("/movies", DELETE_ALL_MOVIES);
 
-// 4. Parašyt endpointą kuris gražintu visas rekomendacijas išrikiuotas mažėjimo tvarka pagal reitingą;
-router.get("/sortedMovieRecommendations", GET_SORTED_BY_RATING_MOVIE_RECOMMENDATIONS);
+router.get("/movies/:id", GET_MOVIE_BY_ID);
 
-// 5. Parašyt endpointą kuris ištrintų visas rekomendacijas;
-router.delete("/movieRecommendations", DELETE_ALL_MOVIE_RECOMMENDATIONS);
+router.get("/limitedMovies", GET_10_MOVIES);
 
-// 1. Prie buvusios  užduoties reikia pridėti getById endpointą;
-router.get("/movies/:id", GET_MOVIE_RECOMMENDATION_BY_ID);
-
-router.get("/limitedMovieRecommendations", GET_10_MOVIE_RECOMMENDATIONS);
-
-router.put("/movieRecommendationUpdate/:id", UPDATE_MOVIE_RECOMMENDATION_BY_ID)
+router.put("/moviesUpdate/:id", UPDATE_MOVIE_BY_ID)
 
 export default router;
