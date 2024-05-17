@@ -1,26 +1,8 @@
-import express from 'express';
-import User from '../models/user.js';
+import express from "express";
+import { SIGN_UP, LOG_IN } from "../controllers/user.js";
+const router = express.Router();
 
-const userRouter = express.Router();
+router.post("/users", SIGN_UP);
+router.post("/users/login", LOG_IN);
 
-userRouter.get('/users', async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-userRouter.post('/users', async (req, res) => {
-  const user = new User(req.body);
-
-  try {
-    const newUser = await user.save();
-    res.status(201).json(newUser);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
-
-export default userRouter;
+export default router;

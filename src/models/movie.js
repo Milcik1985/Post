@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
 const movieSchema = mongoose.Schema({
-    id: {type: String, require:true},
-    imageUrl: {type: String, require: true},
-    title: {type: String, require: true},
-    genre: {type: String, require:true},
-    rating: {type: Number, require: true},
-})
+  id: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  title: { type: String, required: true },
+  genre: { type: String, required: true },
+  rating: { type: Number, required: true },
+});
 
-export default mongoose.model("Movie", movieSchema)
+export default mongoose.model("Movie", movieSchema);

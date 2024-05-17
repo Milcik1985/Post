@@ -1,10 +1,20 @@
 import mongoose from "mongoose";
 
 const moviesListSchema = new mongoose.Schema({
-    genre: {type: String, require: true},
-    movies_ids: {type: Array},
+  id: { type: String, required: true },
+  genre: { type: String, required: true },
+  movies_ids: { type: Array },
+  movies: [
+    {
+      id: { type: String, required: true },
+      imageUrl: { type: String, required: true },
+      title: { type: String, required: true },
+      genre: { type: String, required: true },
+      rating: { type: Number, required: true },
+    },
+  ],
 });
 
-const movieList = mongoose.model("MovieList", moviesListSchema);
+const moviesList = mongoose.model("MovieList", moviesListSchema);
 
-export default movieList;
+export default moviesList;
